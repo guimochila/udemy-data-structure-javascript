@@ -3,7 +3,7 @@ function LinkedList() {
 	this.tail = null; // Points to the end of the list
 }
 
-// Adding nodes to the head of the linked list
+// Adding nodes to the head of the linked list - O(1)
 LinkedList.prototype.addToHead = function (value) {
 	const newNode = new Node(value, this.head, null);
 	if (this.head) {
@@ -15,7 +15,7 @@ LinkedList.prototype.addToHead = function (value) {
 	this.head = newNode;
 }
 
-// Adding nodes to the tail of the linked list
+// Adding nodes to the tail of the linked list - O(1)
 LinkedList.prototype.addToTail = function (value) {
 	const newNode = new Node(value, null, this.tail);
 	if (this.tail) {
@@ -27,7 +27,7 @@ LinkedList.prototype.addToTail = function (value) {
 	this.tail = newNode;
 }
 
-// Remove node from head
+// Remove node from head - O(1)
 LinkedList.prototype.removeHead = function () {
 	if (!this.head) return null;
 
@@ -43,6 +43,51 @@ LinkedList.prototype.removeHead = function () {
 	return val;
 }
 
+// Remove node from tail - O(1)
+LinkedList.prototype.removeTail = function () {
+	if (!this.tail) return null;
+
+	const val = this.tail.value;
+	this.tail = this.tail.prev;
+
+	if (this.tail) {
+		this.tail.next = null;
+	} else {
+		this.head = null;
+	}
+
+	return val;
+}
+
+// Search
+LinkedList.prototype.search = function (searchValue) {
+	let currentNode = this.head;
+
+	while (currentNode) {
+		if (currentNode.value === searchValue) {
+			return currentNode.value;
+		}
+		currentNode = currentNode.next;
+	}
+}
+
+// IndexOf
+LinkedList.prototype.indexOf = function (value) {
+	let currentNode = this.head;
+	let currentIndex = 0;
+	const results = [];
+
+	while (currentNode) {
+		if (currentNode.value === value) {
+			results.push(currentIndex);
+		}
+		currentIndex++;
+		currentNode = currentNode.next;
+	}
+
+	return results;
+}
+
 function Node(value, next, prev) {
 	this.value = value;
 	this.next = next;
@@ -50,12 +95,10 @@ function Node(value, next, prev) {
 }
 
 const ll = new LinkedList();
-ll.addToTail(10);
-ll.addToTail(20);
-ll.addToTail(30);
-ll.addToHead(100);
-console.log(ll.removeHead());
-console.log(ll.removeHead());
-console.log(ll.removeHead());
+ll.addToHead(3);
+ll.addToHead(5);
+ll.addToHead(3);
+ll.addToTail(8);
 
-console.log(ll);
+console.log(ll.indexOf(8));
+
