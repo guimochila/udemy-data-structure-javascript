@@ -59,7 +59,7 @@ LinkedList.prototype.removeTail = function () {
 	return val;
 }
 
-// Search
+// Search - Linear time complexity - O(n)
 LinkedList.prototype.search = function (searchValue) {
 	let currentNode = this.head;
 
